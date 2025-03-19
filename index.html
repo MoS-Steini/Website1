@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory of Stacy - Kinderschutz ist UNverhandelbar!</title>
+</head>
+<body>
+
+<h1>Willkommen auf Memory of Stacy</h1>
+
+<audio id="myAudio" loop>
+    <source src="https://raw.githubusercontent.com/MoS-Steini/Website1/main/audio/song1.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/MoS-Steini/Website1/main/audio/song2.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/MoS-Steini/Website1/main/audio/song3.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/MoS-Steini/Website1/main/audio/song4.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/MoS-Steini/Website1/main/audio/song5.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/MoS-Steini/Website1/main/audio/song6.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var audio = document.getElementById("myAudio");
+        var sources = audio.getElementsByTagName('source');
+        var currentTrack = 0;  // Start bei der ersten Quelle
+
+        function playNextTrack() {
+            currentTrack++;
+            if (currentTrack >= sources.length) {
+                currentTrack = 0;
+            }
+            audio.src = sources[currentTrack].src;
+            audio.play().catch(error => console.log("Autoplay blockiert:", error));
+        }
+
+        function enableAudio() {
+            audio.play().catch(error => console.log("Autoplay blockiert:", error));
+            document.removeEventListener("click", enableAudio);
+            document.removeEventListener("scroll", enableAudio);
+        }
+
+        document.addEventListener("click", enableAudio);
+        document.addEventListener("scroll", enableAudio);
+
+        audio.addEventListener('ended', playNextTrack);
+    });
+</script>
+
+</body>
+</html>
